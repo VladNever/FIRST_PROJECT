@@ -28,7 +28,5 @@ def parsing():
         query_lst.append(adjusted_list)
     fp.close()
     return query_lst
-a = parsing()
-print(len(a))
 if __name__=="__main__":
     parsing()
