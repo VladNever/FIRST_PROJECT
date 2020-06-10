@@ -3,6 +3,7 @@ from .forms import GenreForm
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import ListView
+from django.views.generic import DeleteView
 # Create your views here.
 
 # Для CREATE
@@ -19,18 +20,25 @@ class CreateGenre(CreateView):
     form_class = GenreForm
     # в каком шаблоне всё это отрисовывать?
     template_name = 'testapp/create_genre.html'
-    success_url = "/test"
+    success_url = "/list-genre"
 
 class UpdateGenre(UpdateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'testapp/create_genre.html'
-    success_url = "/test"
+    template_name = 'testapp/update_genre.html'
+    success_url = "/list-genre"
 
 class ListGenre(ListView):
     model = Genre
-    paginate_by = 100
     template_name = 'testapp/list_genre.html'
+
+class DeleteGenre(DeleteView):
+    model = Genre
+    template_name = 'testapp/delete_genre.html'
+    success_url = "/list-genre"
+
+
+
 
 
 #class Test(TemplateView):

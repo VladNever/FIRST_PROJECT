@@ -67,6 +67,11 @@ TEMPLATES = [
         },
     },
 ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+
 
 WSGI_APPLICATION = 'first_project.wsgi.application'
 
@@ -119,3 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/VladNever/FIRST_PROJECT/static'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/VladNever/FIRST_PROJECT/media'

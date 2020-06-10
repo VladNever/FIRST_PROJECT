@@ -6,11 +6,10 @@
         <title>Document</title>
     </head>
     <body>
-        <h1>Create Genre</h1>
+        <h1>Do you really want to delete Genre: {{ object }}?</h1>
         <form action="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="SUBMIT">
+            <input type="submit" value="DELETE">
         </form>
     </body>
 </html>
