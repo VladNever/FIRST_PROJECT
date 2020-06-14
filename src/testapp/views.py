@@ -1,9 +1,11 @@
+from django.urls import reverse_lazy
 from .models import Genre
 from .forms import GenreForm
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import ListView
 from django.views.generic import DeleteView
+from django.views.generic import DetailView
 # Create your views here.
 
 # Для CREATE
@@ -13,20 +15,19 @@ from django.views.generic import DeleteView
 # 4 Показать "другую" страницу (сообщение об успехе)
 
 class CreateGenre(CreateView):
-    # id не нужен
-    # куда сохранять?
     model = Genre
-    # какую форму будем использовать
     form_class = GenreForm
-    # в каком шаблоне всё это отрисовывать?
     template_name = 'testapp/create_genre.html'
-    success_url = "/list-genre"
+    def get_success_url(self):
+        return reverse_lazy('genre:list')
 
 class UpdateGenre(UpdateView):
     model = Genre
     form_class = GenreForm
     template_name = 'testapp/update_genre.html'
-    success_url = "/list-genre"
+    def get_success_url(self):
+        return reverse_lazy('genre:list')
+        #return reverse_lazy('genre:list', kwargs={'pk': self.object.pk})
 
 class ListGenre(ListView):
     model = Genre
@@ -35,7 +36,12 @@ class ListGenre(ListView):
 class DeleteGenre(DeleteView):
     model = Genre
     template_name = 'testapp/delete_genre.html'
-    success_url = "/list-genre"
+    def get_success_url(self):
+        return reverse_lazy('genre:list')
+
+class DetailGenre(DetailView):
+    model = Genre
+    template_name = 'testapp/detail_genre.html'
 
 
 

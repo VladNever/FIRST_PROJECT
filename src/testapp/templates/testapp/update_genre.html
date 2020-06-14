@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>Update Genre</h1>
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="SUBMIT">
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Изменение Жанра {% endblock title %}
+  {% block main %} 
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Изменить Жанр</h1>
+      </div>
+    </section>
+    <div class="album py-5 bg-light"> 
+      <form action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-danger">Отправить</button>
+      </form>
+    </div>
+  {% endblock main %}
