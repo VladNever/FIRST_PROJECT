@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block title %} Список Жанров {% endblock title %}
+  {% block main %} 
+    <section class="jumbotron text-center">
+      <div class="container">
+      <h1>Список Книг</h1>
+      <p>
+          <a href="{% url 'books:create' %}" class="btn btn-success">Создать книгу</a>
+      </p>
+      </div>
+    </section>
+    <div class="album py-5 bg-light"> 
+      <div class="container">
+        <div class="row">
+          {% for obj in object_list %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                    <a href="{% url 'books:detail' obj.pk %}"> 
+                      {% if obj.cover_photo %}
+                        <p><img src="{{ obj.cover_photo.url }}" class="card-img-top" alt="..."></p>
+                      {% else %}
+                        <p></p>
+                      {% endif %}
+                    </a> 
+                    <div class="card-body">
+                      <p class="card-text">{{ obj.name }}
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <a href="{% url 'books:update' obj.pk %}"><i class="fas fa-pen"></i><br>
+                            <a href="{% url 'books:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                          </div>
+                          <small class="text-muted">{{ obj.card_change_date }}</small>
+                        </div>
+                      </p>
+                    </div>
+              </div>
+            </div>
+          {% endfor %} 
+        </div>
+      </div>
+    </div>
+  {% endblock main %}

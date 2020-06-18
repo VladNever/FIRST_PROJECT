@@ -1,5 +1,5 @@
 from django.urls import path
-from testapp.views import CreateGenre, UpdateGenre, ListGenre, DeleteGenre, DetailGenre
+from genres.views import CreateGenre, UpdateGenre, ListGenre, DeleteGenre, DetailGenre
 
 app_name = "genre"
 

@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'testapp'
+    'genres',
+    'books',
+    'homepage'
 ]
 
 MIDDLEWARE = [
@@ -129,5 +131,6 @@ STATIC_ROOT = '/home/VladNever/FIRST_PROJECT/static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/VladNever/FIRST_PROJECT/media'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

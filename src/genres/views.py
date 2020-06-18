@@ -17,38 +17,38 @@ from django.views.generic import DetailView
 class CreateGenre(CreateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'testapp/create_genre.html'
+    template_name = 'genres/create_genre.html'
     def get_success_url(self):
         return reverse_lazy('genre:list')
 
 class UpdateGenre(UpdateView):
     model = Genre
     form_class = GenreForm
-    template_name = 'testapp/update_genre.html'
+    template_name = 'genres/update_genre.html'
     def get_success_url(self):
         return reverse_lazy('genre:list')
         #return reverse_lazy('genre:list', kwargs={'pk': self.object.pk})
 
 class ListGenre(ListView):
     model = Genre
-    template_name = 'testapp/list_genre.html'
+    template_name = 'genres/list_genre.html'
 
 class DeleteGenre(DeleteView):
     model = Genre
-    template_name = 'testapp/delete_genre.html'
+    template_name = 'genres/delete_genre.html'
     def get_success_url(self):
         return reverse_lazy('genre:list')
 
 class DetailGenre(DetailView):
     model = Genre
-    template_name = 'testapp/detail_genre.html'
+    template_name = 'genres/detail_genre.html'
 
 
 
 
 
 #class Test(TemplateView):
-#    template_name = 'testapp/test.html'
+#    template_name = 'genres/test.html'
 #    
 #    def get_context_data(self, **kwargs):
 #        # 1. Берём родительский метод применя метода super() 
