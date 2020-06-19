@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('genre/', include('genres.urls', namespace="genre")),
     path('books/', include('books.urls', namespace="books")),
-    path('homepage/', include('homepage.urls', namespace="homepage")),
+    path('', include('homepage.urls', namespace="homepage")),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
