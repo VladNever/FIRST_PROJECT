@@ -16,7 +16,8 @@ class HomePage(TemplateView):
     extra_context = {
         'Books': Books.objects.all(),
         'Genre': Genre.objects.all(),
-        'last_added_books': Books.objects.all().order_by('-catalog_date')[:2]
+        'last_added_books': Books.objects.all().order_by('-catalog_date')[:2],
+        'most_expensive': Books.objects.all().order_by('-price')[:2],
     } 
    
 
