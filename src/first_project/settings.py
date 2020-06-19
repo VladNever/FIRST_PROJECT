@@ -132,5 +132,6 @@ STATIC_ROOT = '/home/VladNever/FIRST_PROJECT/static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/home/VladNever/FIRST_PROJECT/media'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
