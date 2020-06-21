@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from .models import Books
 from .forms import BooksForm
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import ListView
@@ -14,14 +15,17 @@ from django.views.generic import DetailView
 # 3 POST - получить данные из POST-запроса, создать объкт, сохранить его в БД
 # 4 Показать "другую" страницу (сообщение об успехе)
 
-class CreateBooks(CreateView):
+class CreateBooks(PermissionRequiredMixin, CreateView):
+    permission_required = 'books.add_books'
     model = Books
     form_class = BooksForm
     template_name = 'books/create_books.html'
     def get_success_url(self):
         return reverse_lazy('books:list')
 
-class UpdateBooks(UpdateView):
+
+class UpdateBooks(PermissionRequiredMixin, UpdateView):
+    permission_required = 'books.add_books'
     model = Books
     form_class = BooksForm
     template_name = 'books/update_books.html'
@@ -32,7 +36,8 @@ class ListBooks(ListView):
     model = Books
     template_name = 'books/list_books.html'
 
-class DeleteBooks(DeleteView):
+class DeleteBooks(PermissionRequiredMixin, DeleteView):
+    permission_required = 'books.add_books'
     model = Books
     template_name = 'books/delete_books.html'
     def get_success_url(self):

@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from .models import Genre
 from .forms import GenreForm
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.views.generic import ListView
@@ -14,14 +15,16 @@ from django.views.generic import DetailView
 # 3 POST - получить данные из POST-запроса, создать объкт, сохранить его в БД
 # 4 Показать "другую" страницу (сообщение об успехе)
 
-class CreateGenre(CreateView):
+class CreateGenre(PermissionRequiredMixin, CreateView):
+    permission_required = 'genres.add_genre'
     model = Genre
     form_class = GenreForm
     template_name = 'genres/create_genre.html'
     def get_success_url(self):
         return reverse_lazy('genre:list')
 
-class UpdateGenre(UpdateView):
+class UpdateGenre(PermissionRequiredMixin, UpdateView):
+    permission_required = 'genres.add_genre'
     model = Genre
     form_class = GenreForm
     template_name = 'genres/update_genre.html'
@@ -33,7 +36,8 @@ class ListGenre(ListView):
     model = Genre
     template_name = 'genres/list_genre.html'
 
-class DeleteGenre(DeleteView):
+class DeleteGenre(PermissionRequiredMixin, DeleteView):
+    permission_required = 'genres.add_genre'
     model = Genre
     template_name = 'genres/delete_genre.html'
     def get_success_url(self):

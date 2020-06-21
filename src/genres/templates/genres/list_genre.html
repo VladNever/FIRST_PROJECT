@@ -24,8 +24,10 @@
                       <p class="card-text">{{ obj.description }}
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <a href="{% url 'genre:update' obj.pk %}"><i class="fas fa-pen"></i><br>
-                            <a href="{% url 'genre:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                            {% if 'genres.change_genre' and 'genres.delete_genre' in perms %}
+                              <a href="{% url 'genre:update' obj.pk %}"><i class="fas fa-pen"></i><br>
+                              <a href="{% url 'genre:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                            {% endif %}
                           </div>
                         </div>
                       </p>

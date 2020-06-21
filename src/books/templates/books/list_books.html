@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-  {% block title %} Список Жанров {% endblock title %}
+  {% block title %} Список книг {% endblock title %}
   {% block main %}
     <section class="jumbotron text-center">
       <div class="container">
@@ -15,7 +15,7 @@
               <div class="card mb-4 shadow-sm">
                     <a href="{% url 'books:detail' obj.pk %}"> 
                       {% if obj.cover_photo %}
-                        <p><img src="{{ obj.cover_photo.url }}" class="card-img-top" alt="..."></p>
+                        <p><img src="{{ obj.cover_photo.url }}" width="150" height="200"></p>
                       {% else %}
                         <p></p>
                       {% endif %}
@@ -24,8 +24,10 @@
                       <p class="card-text">{{ obj.name }}
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <a href="{% url 'books:update' obj.pk %}"><i class="fas fa-pen"></i><br>
-                            <a href="{% url 'books:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                            {% if 'books.change_books' and 'books.delete_books' in perms %}
+                              <a href="{% url 'books:update' obj.pk %}"><i class="fas fa-pen"></i><br>
+                              <a href="{% url 'books:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                            {% endif %}
                           </div>
                           <small class="text-muted">{{ obj.card_change_date }}</small>
                         </div>
