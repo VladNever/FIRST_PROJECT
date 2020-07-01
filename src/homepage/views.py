@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from books.models import Books
-from genres.models import Genre
+from ref_books.models import Genre
 from django.views.generic import TemplateView
 
 # Create your views here.

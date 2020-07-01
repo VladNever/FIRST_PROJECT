@@ -1,0 +1,43 @@
+{% extends "base_login.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Вход в систему {% endblock title %}
+  {% block main %}
+  <div class="row row-cols-3">
+      <div class="col"></div>
+        <div class="col">
+        <div class="jumbotron">
+          <h1>Авторизация</h1>
+        </div>
+      </div>
+  </div>
+  <div class="container">
+    <div class="row row-cols-3">
+      <div class="col"></div>
+      <div class="col">          
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}    
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <input type="submit" value="Войти" class="btn btn-success">
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        <p><a href="{% url 'profile:create'%}">Регистрация</a></p>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+  {# Assumes you setup the password_reset view in your URLconf #}
+  {% comment %} <p><a href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
+  
+  {% endblock main %}

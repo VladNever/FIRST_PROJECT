@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block title %} Список жанров {% endblock title %}
+  {% block main %} 
+    <section class="jumbotron text-center">
+      <div class="container">
+      <h1>Список жанров</h1>
+      </div>
+    </section>
+    <div class="album py-5 bg-light"> 
+      <div class="container">
+        <div class="row">
+          {% for obj in object_list %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                    <a href="{% url 'ref_books:detail_genre' obj.pk %}"> 
+                      <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#55595c"/>
+                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">{{ obj.name }}</text>
+                      </svg>
+                    </a> 
+                    <div class="card-body">
+                      <p class="card-text">{{ obj.description }}
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            {% if 'ref_books.change_genre' and 'ref_books.delete_genre' in perms %}
+                              <a href="{% url 'ref_books:update_genre' obj.pk %}"><i class="fas fa-pen"></i><br>
+                              <a href="{% url 'ref_books:delete_genre' obj.pk %}"><i class="fas fa-trash"></i></a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </p>
+                    </div>
+              </div>
+            </div>
+          {% endfor %} 
+        </div>
+      </div>
+    </div>
+  {% endblock main %}

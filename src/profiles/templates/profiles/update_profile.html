@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-  {% block title %} Удаление Жанра {% endblock title %}
+  {% block title %} Изменение Профиля {% endblock title %}
   {% block main %} 
     <section class="jumbotron text-center">
       <div class="container">
-        <h1>Вы действительно хотите удалить Жанр: {{ object }}?</h1>
+        <h1>Изменить Профиль</h1>
       </div>
     </section>
     <div class="album py-5 bg-light"> 
       <form action="" method="post">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Удалить</button>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-danger">Отправить</button>
       </form>
     </div>
   {% endblock main %}

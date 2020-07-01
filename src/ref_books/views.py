@@ -16,36 +16,36 @@ from django.views.generic import DetailView
 # 4 Показать "другую" страницу (сообщение об успехе)
 
 class CreateGenre(PermissionRequiredMixin, CreateView):
-    permission_required = 'genres.add_genre'
+    permission_required = 'ref_books.add_genre'
     model = Genre
     form_class = GenreForm
-    template_name = 'genres/create_genre.html'
+    template_name = 'ref_books/create_genre.html'
     def get_success_url(self):
-        return reverse_lazy('genre:list')
+        return reverse_lazy('ref_books:list_genre')
 
 class UpdateGenre(PermissionRequiredMixin, UpdateView):
-    permission_required = 'genres.add_genre'
+    permission_required = 'ref_books.change_genre'
     model = Genre
     form_class = GenreForm
-    template_name = 'genres/update_genre.html'
+    template_name = 'ref_books/update_genre.html'
     def get_success_url(self):
-        return reverse_lazy('genre:list')
+        return reverse_lazy('ref_books:list_genre')
         #return reverse_lazy('genre:list', kwargs={'pk': self.object.pk})
 
 class ListGenre(ListView):
     model = Genre
-    template_name = 'genres/list_genre.html'
+    template_name = 'ref_books/list_genre.html'
 
 class DeleteGenre(PermissionRequiredMixin, DeleteView):
-    permission_required = 'genres.add_genre'
+    permission_required = 'ref_books.delete_genre'
     model = Genre
-    template_name = 'genres/delete_genre.html'
+    template_name = 'ref_books/delete_genre.html'
     def get_success_url(self):
-        return reverse_lazy('genre:list')
+        return reverse_lazy('ref_books:list_genre')
 
 class DetailGenre(DetailView):
     model = Genre
-    template_name = 'genres/detail_genre.html'
+    template_name = 'ref_books/detail_genre.html'
 
 
 

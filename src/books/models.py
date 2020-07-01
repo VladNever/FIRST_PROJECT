@@ -1,5 +1,5 @@
 from django.db import models
-from genres.models import Genre
+from ref_books.models import Genre
 # Create your models here.
 
 #Чтобы изменения попали в базу данных надо сделать:

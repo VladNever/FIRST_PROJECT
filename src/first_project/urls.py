@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from profiles.auth_views import MyLogin, MyLogout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('genre/', include('genres.urls', namespace="genre")),
+    path('ref_books/', include('ref_books.urls', namespace="ref_books")),
     path('books/', include('books.urls', namespace="books")),
     path('', include('homepage.urls', namespace="homepage")),
+    path('profiles/', include('profiles.urls', namespace="profile")),
+    path('login/', MyLogin.as_view(), name="login"),
+    path('logout/', MyLogout.as_view(), name="logout"),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
