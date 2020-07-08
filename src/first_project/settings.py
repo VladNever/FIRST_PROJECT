@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'homepage',
     'ref_books',
     'profiles',
+    'basket',
 ]
 
 AUTH_USER_MODEL = 'profiles.Profile'

@@ -18,14 +18,13 @@ def add_group_admin(sender, created, **kwargs):
     else:
         pass
 
-
 @receiver(post_save, sender=Profile)
 def add_group_managers(sender, created, **kwargs):
-    if created:
+    if created is True:
         perms_all = Permission.objects.all()
         perms_managers = [
-            perms_all.get(name="Can change profile"),
-            perms_all.get(name="Can delete profile"),
+            perms_all.get(name="Can change user"),
+            perms_all.get(name="Can delete user"),
             perms_all.get(name="Can add books"),
             perms_all.get(name="Can change books"),
             perms_all.get(name="Can delete books"),
@@ -47,14 +46,15 @@ def add_group_customers(sender, created, **kwargs):
     if created:
         perms_all = Permission.objects.all()
         perms_customers = [
-            perms_all.get(name="Can change profile"),
-            perms_all.get(name="Can delete profile")
+            perms_all.get(name="Can change user"),
+            perms_all.get(name="Can delete user")
         ]
         gr_customers, created = Group.objects.get_or_create(
             name="Customers", 
             defaults = {}
             )
         gr_customers.permissions.set(perms_customers)
+        print('Миграция прошла успешно')
     else:
         pass
 
@@ -62,7 +62,7 @@ def add_group_customers(sender, created, **kwargs):
 @receiver(post_save, sender=Profile)
 # created - если сущность только создана, а не сохранялась 
 def set_group(sender, instance, created,**kwargs):
-    #if created:
+    if created:
         if instance.is_superuser:
             gr = Group.objects.get(
             name="Admin"
@@ -84,8 +84,8 @@ def set_group(sender, instance, created,**kwargs):
             instance.groups.add(gr)
         else:
             pass
-    #else:
-    #    pass
+    else:
+        pass
 
 
 

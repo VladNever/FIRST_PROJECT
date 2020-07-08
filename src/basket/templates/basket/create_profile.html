@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Создание нового пользователя {% endblock title %}
+  {% block main %}
+    <main role="main" class="container"> 
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1>Создание нового пользователя</h1>
+        </div>
+      </section>
+      <div class="album py-5 bg-light">
+        <div class="my-3 p-3 bg-white rounded shadow-sm"> 
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-danger">Отправить</button>
+          </form>
+        </div>  
+      </div>
+    </div>
+  {% endblock main %}

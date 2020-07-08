@@ -26,8 +26,12 @@
                           <div class="btn-group">
                             {% if 'books.change_books' and 'books.delete_books' in perms %}
                               <a href="{% url 'books:update' obj.pk %}"><i class="fas fa-pen"></i><br>
-                              <a href="{% url 'books:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
+                              <a href="{% url 'books:delete' obj.pk %}"><i class="fas fa-trash"></i></a><br>
+                              {% comment %} <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a><br> {% endcomment %}
                             {% endif %}
+                            {% comment %} {% if 'books.change_books' and 'books.delete_books' in perms %} {% endcomment %}
+                              <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a><br>
+                            {% comment %} {% endif %} {% endcomment %}
                           </div>
                           <small class="text-muted">{{ obj.card_change_date }}</small>
                         </div>

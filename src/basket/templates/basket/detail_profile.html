@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Профиль {% endblock title %}
+  {% block main %} 
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Профиль пользователя: {{ object.first_name }}?</h1>
+      </div>
+    </section>
+    <div class="album py-5 bg-light"> 
+    Coming soon
+    </div>
+  {% endblock main %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Удаление книги из корзины {% endblock title %}
+  {% block main %} 
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1>Вы действительно хотите удалить данную книгу из Вашей корзины?</h1>
+      </div>
+    </section>
+    <div class="album py-5 bg-light"> 
+      <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+      </form>
+    </div>
+  {% endblock main %}
