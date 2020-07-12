@@ -7,7 +7,9 @@ class Basket(models.Model):
     user = models.ForeignKey(
         Profile,
         on_delete=models.CASCADE,
-        #primary_key = True
+        blank=True, 
+        null=True, 
+        related_name='basket'
     )
     basket_date = models.DateTimeField(
         verbose_name="Дата создания корзины",
@@ -19,6 +21,12 @@ class Basket(models.Model):
         auto_now=True,
         auto_now_add=False
     )
+    session_key = models.CharField(
+        max_length=40,
+    )
+    class Meta:
+        unique_together = ('user', 'session_key',)
+
     def __str__(self):
         return f'Basket #{self.pk}'
 

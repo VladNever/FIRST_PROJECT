@@ -51,6 +51,12 @@ AUTH_USER_MODEL = 'profiles.Profile'
 LOGIN_REDIRECT_URL = reverse_lazy('homepage:homepage')
 LOGOUT_REDIRECT_URL = reverse_lazy('homepage:homepage')
 
+#Сессии
+#В случае True, сохранит сессию в базе данных по каждому запросу. Срок действия сессии также обновляется каждый раз.
+SESSION_SAVE_EVERY_REQUEST = True
+#В случае True сессия должна истечь при закрытии браузера
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
