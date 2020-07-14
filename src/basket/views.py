@@ -1,10 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, DeleteView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import UpdateView, ListView, DeleteView, DetailView
 from .models import Basket, BookInBasket
 from books.models import Books
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404
 
 class AddBookToBasket(UpdateView):
     login_url = reverse_lazy('login')
@@ -36,7 +34,7 @@ class AddBookToBasket(UpdateView):
             basket, created = Basket.objects.get_or_create(
                 session_key = session_key,
                 defaults = {'user': None}
-            )     
+            )
             obj, create = self.model.objects.get_or_create(
                 basket = basket,
                 book = book,
@@ -46,16 +44,32 @@ class AddBookToBasket(UpdateView):
     def get_success_url(self):
         return reverse_lazy('books:list')
 
-class ListBooksInBasket(ListView):
-    login_url = reverse_lazy('login')
-    model = BookInBasket
-    template_name = 'basket/list_books_in_basket.html'
 
-    def get_queryset(self):
-        queryset = BookInBasket.objects.filter(
-            basket__session_key=self.request.session.session_key,
-        )
-        return queryset
+
+
+
+class ListBooksInBasket(DetailView):
+    login_url = reverse_lazy('login')
+    model = Basket
+    template_name = 'basket/list_books_in_basket.html'
+    def get_object(self):
+        session_key = self.request.session.session_key
+        obj = Basket.objects.filter(session_key=session_key)
+        if obj:
+            obj=obj.get()
+            return obj
+        else:
+            return obj
+
+
+
+
+
+    #def get_queryset(self):
+    #    queryset = BookInBasket.objects.filter(
+    #        basket__session_key=self.request.session.session_key,
+    #    )
+    #    return queryset
 
 class DeleteBooksFromBasket(DeleteView):
     login_url = reverse_lazy('login')
@@ -84,10 +98,10 @@ class DeleteBooksFromBasket(DeleteView):
         #            user = user,
         #        )
         #    else:
-        #        basket = Basket.objects.create( 
+        #        basket = Basket.objects.create(
         #            user = user,
         #        )
-        #        self.request.session['basket_pk'] = basket.pk        
+        #        self.request.session['basket_pk'] = basket.pk
         #    obj, create = self.model.objects.get_or_create(
         #        basket = basket,
         #        book = book,
@@ -98,7 +112,7 @@ class DeleteBooksFromBasket(DeleteView):
         #    basket, created = Basket.objects.get_or_create(
         #        session_key = self.request.session.session_key,
         #        defaults = {'user': None}
-        #    )     
+        #    )
         #    obj, create = self.model.objects.get_or_create(
         #        basket = basket,
         #        book = book,
