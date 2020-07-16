@@ -16,8 +16,10 @@ class Books(models.Model):
         null=True,
         blank=True
     )
-    price = models.IntegerField(
+    price = models.DecimalField(
         verbose_name="Цена (BYN)",
+        max_digits= 20,
+        decimal_places= 2
     )
     author = models.CharField(
         verbose_name="Автор",

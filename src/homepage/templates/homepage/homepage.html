@@ -2,91 +2,100 @@
 {% load static %}
   {% block title %} Домашняя страница {% endblock title %}
   {% block main %}
-      <div class="d-flex align-items-center p-3 my-3 text-black-50 bg-purple rounded shadow-sm">
-        <div class="lh-100">
-          <h6 class="mb-0 text-dark lh-100">Интернет-магазин книг</h6>
-          <small>Since 2011</small>
-        </div>
+    <div class="row">
+      <div class="col">
+        
       </div>
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <h6 class="border-bottom border-gray pb-2 mb-0">Последние добавленные книги</h6>
-              <div class="card-group">
-                {% for obj in last_added_books %}
-                  <div style="width: 300px;">
-                    <div class="card mb-3" >
-                      <div class="row no-gutters" style="height: 230px; background-color: rgba(255,0,0,0.1);">
-                        
-                          <div class="col-md-4">
-                            <div class="col-md-auto p-0" >
-                              <a href="{% url 'books:detail' obj.pk %}"> 
-                                {% if obj.cover_photo %}
-                                  <p><img src="{{ obj.cover_photo.url }}" class="card-img" alt="..." width="100" height="138"></p>
-                                {% else %}
-                                  <p></p>
-                                {% endif %}
-                              </a>
+      <div class="col-7">
+        <div class="d-flex align-items-center p-3 my-3 text-black-50 bg-purple rounded shadow-sm">
+          <div class="lh-100">
+            <h6 class="mb-0 text-dark lh-100">Интернет-магазин книг</h6>
+            <small>Since 2011</small>
+          </div>
+        </div>
+          <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <h6 class="border-bottom border-gray pb-2 mb-0">Последние добавленные книги</h6>
+                <div class="card-group">
+                  {% for obj in last_added_books %}
+                    <div style="width: 300px;">
+                      <div class="card mb-3" >
+                        <div class="row no-gutters" style="height: 230px; background-color: rgba(255,0,0,0.1);">
+
+                            <div class="col-md-4">
+                              <div class="col-md-auto p-0" >
+                                <a href="{% url 'books:detail' obj.pk %}"> 
+                                  {% if obj.cover_photo %}
+                                    <p><img src="{{ obj.cover_photo.url }}" class="card-img" alt="..." width="100" height="138"></p>
+                                  {% else %}
+                                    <p></p>
+                                  {% endif %}
+                                </a>
+                              </div>
+                              <div class="col-md-auto p-0" >
+                                <h6 class="card-title">Добавить в корзину: </h6>
+                                <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a>
+                              </div>
                             </div>
-                            <div class="col-md-auto p-0" >
-                              <h6 class="card-title">Добавить в корзину: </h6>
-                              <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a>
-                            </div>
-                          </div>
-                        
-                       <div class="col-md-8">
-                         <div class="card-body">
-                           <h5 class="card-title">{{ obj.name }}</h5>
-                           <p class="card-text">{{ obj.author }}</p>
-                           <p class="card-text">Цена (BYN):{{ obj.price }}</p>
-                           <p class="card-text"><small class="text-muted">{{ obj.card_change_date }}</small></p>
+
+                         <div class="col-md-8">
+                           <div class="card-body">
+                             <h5 class="card-title">{{ obj.name }}</h5>
+                             <p class="card-text">{{ obj.author }}</p>
+                             <p class="card-text">Цена (BYN):{{ obj.price }}</p>
+                             <p class="card-text"><small class="text-muted">{{ obj.card_change_date }}</small></p>
+                           </div>
                          </div>
-                       </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                {% endfor %}
-              </div>
-              <small class="d-block text-right mt-3">
-                <a href="#">All updates</a>
-              </small>                
-        </div>
-
-      <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Самые дорогие книги</h6>
-          <div class="card-group">
-            {% for obj in most_expensive %}
-              <div style="width: 300px;">
-                <div class="card mb-3" >
-                  <div class="row no-gutters" style="height: 230px; 230px; background-color: rgba(255,0,0,0.1);">
-                   <div class="col-md-4">
-                      <div class="col-md-auto p-0" >
-                        <a href="{% url 'books:detail' obj.pk %}"> 
-                          {% if obj.cover_photo %}
-                            <p><img src="{{ obj.cover_photo.url }}" class="card-img" alt="..." width="100" height="138"></p>
-                          {% else %}
-                            <p></p>
-                          {% endif %}
-                        </a>
-                      </div>
-                      <div class="col-md-auto p-0" >
-                        <h6 class="card-title">Добавить в корзину: </h6>
-                        <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a>
-                      </div>
-                   </div>
-                   <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ obj.name }}</h5>
-                        <p class="card-text">{{ obj.author }}</p>
-                        <p class="card-text">Цена (BYN):{{ obj.price }}</p>
-                        <p class="card-text"><small class="text-muted">{{ obj.card_change_date }}</small></p>
-                      </div>
-                   </div>
+                  {% endfor %}
+                </div>
+                <small class="d-block text-right mt-3">
+                  <a href="#">All updates</a>
+                </small>                
+          </div>
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+          <h6 class="border-bottom border-gray pb-2 mb-0">Самые дорогие книги</h6>
+            <div class="card-group">
+              {% for obj in most_expensive %}
+                <div style="width: 300px;">
+                  <div class="card mb-3" >
+                    <div class="row no-gutters" style="height: 230px; 230px; background-color: rgba(255,0,0,0.1);">
+                     <div class="col-md-4">
+                        <div class="col-md-auto p-0" >
+                          <a href="{% url 'books:detail' obj.pk %}"> 
+                            {% if obj.cover_photo %}
+                              <p><img src="{{ obj.cover_photo.url }}" class="card-img" alt="..." width="100" height="138"></p>
+                            {% else %}
+                              <p></p>
+                            {% endif %}
+                          </a>
+                        </div>
+                        <div class="col-md-auto p-0" >
+                          <h6 class="card-title">Добавить в корзину: </h6>
+                          <a href="{% url 'basket:add'%}?book_pk={{ obj.pk }}"><i class="fas fa-shopping-basket"></i></a>
+                        </div>
+                     </div>
+                     <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ obj.name }}</h5>
+                          <p class="card-text">{{ obj.author }}</p>
+                          <p class="card-text">Цена (BYN):{{ obj.price }}</p>
+                          <p class="card-text"><small class="text-muted">{{ obj.card_change_date }}</small></p>
+                        </div>
+                     </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
-          </div>
-        <small class="d-block text-right mt-3">
-          <a href="#">All suggestions</a>
-        </small>
-      </div>   
+              {% endfor %}
+            </div>
+          <small class="d-block text-right mt-3">
+            <a href="#">All suggestions</a>
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        
+      </div>
+    </div> 
   {% endblock main %}

@@ -46,7 +46,7 @@
   <body>
     {% include "header.html" %}
     <div class="mt-5 pt-1">
-      <main role="main" class="container pt-5">
+      <main role="main" >
         {% block main %} Unknown Body {% endblock main %}
       </main>
     </div>
@@ -56,3 +56,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
+
+
+{% comment %} 
+
+          <div class="row">
+            <div class="col">
+              1 из 3
+            </div>
+            <div class="col-7">
+              Unknown Body
+            </div>
+            <div class="col">
+              3 из 3
+            </div>
+          </div> 
+          
+{% endcomment %}

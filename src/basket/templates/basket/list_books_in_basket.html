@@ -2,45 +2,79 @@
 {% load static %}
   {% block title %} Корзина {% endblock title %}
   {% block main %}
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1>Список книг в Корзине</h1>
+    <div class="row">
+      <div class="col">
+        
       </div>
-    </section>
-    {% for obj in object.books.all %}
-        <ul class="list-group"><br>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  {% if obj.book.cover_photo %}
-                    <img src="{{ obj.book.cover_photo.url }}" width="150" height="200">
-                  {% else %}
-                    <p></p>
-                  {% endif %}
-                </div>
-                <div class="col-6">
+      <div class="col-7">
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1>Список книг в Корзине</h1><br>  
+          </div>
+        </section>
+        {% for obj in object.books.all %}
+            <ul class="list-group"><br>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="container">
                   <div class="row">
                     <div class="col">
-                      <p class="text-right font-weight-bold">Наименование книги:</p>
-                      <p class="text-right font-weight-bold">Автор:</p>
-                      <p class="text-right font-weight-bold">Цена (BYN):</p>
+                      {% if obj.book.cover_photo %}
+                        <img src="{{ obj.book.cover_photo.url }}" width="150" height="200">
+                      {% else %}
+                        <p></p>
+                      {% endif %}
                     </div>
                     <div class="col-6">
-                      <p class="text-left">{{ obj.book.name }}</p>
-                      <p class="text-left">{{ obj.book.author }}</p>
-                      <p class="text-left">{{ obj.book.price }}</p>
+                      <div class="row">
+                        <div class="col">
+                          <p class="text-right font-weight-bold">Наименование книги:</p>
+                          <p class="text-right font-weight-bold">Автор:</p>
+                          <p class="text-right font-weight-bold">Цена (BYN):</p>
+                        </div>
+                        <div class="col-6">
+                          <p class="text-left">{{ obj.book.name }}</p>
+                          <p class="text-left">{{ obj.book.author }}</p>
+                          <p class="text-left">{{ obj.book.price }}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <p class="text-left">
+                        <span class="badge badge-primary badge-pill">Сумма (BYN): {{ obj.price }}</span><br>
+                        <span class="badge badge-primary badge-pill">Количество: {{ obj.quantity }}</span>
+                      </p>
+                        <a href="{% url 'basket:add'%}?book_pk={{ obj.book.pk }}"><i class="fas fa-shopping-basket"></i></a>
+                        <a href="{% url 'basket:delete' obj.pk %}"><i class="fas fa-trash"></i></a>
                     </div>
                   </div>
                 </div>
-                <div class="col">
-                  <span class="badge badge-primary badge-pill">Количество: {{ obj.quantity }}</span>
-                  <a href="{% url 'basket:add'%}?book_pk={{ obj.book.pk }}"><i class="fas fa-shopping-basket"></i></a>
-                  <a href="{% url 'basket:delete' obj.pk %}"><i class="fas fa-trash"></i></a><br>
+              </li>
+            </ul>
+        {% endfor %}
+      </div>
+      <div class="col bg-light">
+        <div class="row">
+          <div class="col">
+            <div class="card mb-3 mt-5 position-fixed" style="max-width: 18rem;">
+              <div class="card-header bg-transparent ">
+                <h4 class="card-title">Оформление заказа:</h4>
+              </div>
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col ">
+                    К оплате BYN:
+                  </div>
+                  <div class="col">
+                    <b>{{ object.price }}</b>
+                  </div>
                 </div>
               </div>
+              <div class="card-footer bg-transparent ">
+                <button type="button" class="btn btn-danger btn-lg btn-block">Оформить заказ</button>
+              </div>
             </div>
-          </li>
-        </ul>
-    {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
   {% endblock main %}

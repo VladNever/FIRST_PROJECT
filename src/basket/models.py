@@ -1,7 +1,7 @@
 from django.db import models
 from books.models import Books
 from profiles.models import Profile
-
+from decimal import Decimal, ROUND_HALF_UP
 
 class Basket(models.Model):
     user = models.ForeignKey(
@@ -26,6 +26,13 @@ class Basket(models.Model):
     )
     class Meta:
         unique_together = ('user', 'session_key',)
+
+    @property
+    def price(self):
+        price = 0
+        for book in self.books.all():
+            price += book.price
+        return price
 
     def __str__(self):
         return f'Basket #{self.pk}'
@@ -59,6 +66,11 @@ class BookInBasket(models.Model):
     
     class Meta:
         unique_together = (('basket', 'book'),)
+
+    @property
+    def price(self):
+        price = self.quantity * self.book.price
+        return price
 
     def __str__(self):
         return f"Book #{self.book.pk} in basket #{self.basket.pk}"

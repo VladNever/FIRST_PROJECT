@@ -2,60 +2,70 @@
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Карточка книги {% endblock title %}
-  {% block main %} 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          {% if object.cover_photo %}
-            <p><img src="{{ object.cover_photo.url }}" class="card-img-top" alt="..."></p>
-          {% else %}
-            <p></p>
-          {% endif %}
-        </div>
-        <div class="col-sm">
-          <ul class="list-group">
-            <li class="list-group-item">Название книги</li>
-            <li class="list-group-item">Цена (BYN)</li>
-            <li class="list-group-item">Автор</li>
-            <li class="list-group-item">Серия</li>
-            <li class="list-group-item">Жанр</li>
-            <li class="list-group-item">Год издания</li>
-            <li class="list-group-item">Количество страниц</li>
-            <li class="list-group-item">Переплёт</li>
-            <li class="list-group-item">Формат книги</li>
-            <li class="list-group-item">ISBN</li>
-            <li class="list-group-item">Вес книги (в граммах)</li>
-            <li class="list-group-item">Возрастные ограничения</li>
-            <li class="list-group-item">Издательство</li>
-            <li class="list-group-item">Количество книг в наличии</li>
-            <li class="list-group-item">Доступен для заказа</li>
-            <li class="list-group-item">Рейтинг</li>
-            <li class="list-group-item">Дата внесения в каталог</li>
-            <li class="list-group-item">Дата последнего изменения карточки</li>
-          </ul>        
-        </div>
-        <div class="col-sm">
-          <ul class="list-group">
-            <li class="list-group-item">{{object.name}}</li>
-            <li class="list-group-item">{{object.price}}</li>
-            <li class="list-group-item">{{object.author}}</li>
-            <li class="list-group-item">{{object.series}}</li>
-            <li class="list-group-item">{{object.genre}}</li>
-            <li class="list-group-item">{{object.publishing_year}}</li>
-            <li class="list-group-item">{{object.pages}}</li>
-            <li class="list-group-item">{{object.binding}}</li>
-            <li class="list-group-item">{{object.book_format}}</li>
-            <li class="list-group-item">{{object.isbn}}</li>
-            <li class="list-group-item">{{object.weight}}</li>
-            <li class="list-group-item">{{object.age}}</li>
-            <li class="list-group-item">{{object.publishing}}</li>
-            <li class="list-group-item">{{object.in_stock}}</li>
-            <li class="list-group-item">{{object.active}}</li>
-            <li class="list-group-item">{{object.rating}}</li>
-            <li class="list-group-item">{{object.catalog_date}}</li>
-            <li class="list-group-item">{{object.card_change_date}}</li>
-          </ul>
+  {% block main %}
+    <div class="row">
+      <div class="col">
+        
+      </div>
+      <div class="col-7">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              {% if object.cover_photo %}
+                <p><img src="{{ object.cover_photo.url }}" class="card-img-top" alt="..."></p>
+              {% else %}
+                <p></p>
+              {% endif %}
+            </div>
+            <div class="col-sm">
+              <ul class="list-group">
+                <li class="list-group-item">Название книги</li>
+                <li class="list-group-item">Цена (BYN)</li>
+                <li class="list-group-item">Автор</li>
+                <li class="list-group-item">Серия</li>
+                <li class="list-group-item">Жанр</li>
+                <li class="list-group-item">Год издания</li>
+                <li class="list-group-item">Количество страниц</li>
+                <li class="list-group-item">Переплёт</li>
+                <li class="list-group-item">Формат книги</li>
+                <li class="list-group-item">ISBN</li>
+                <li class="list-group-item">Вес книги (в граммах)</li>
+                <li class="list-group-item">Возрастные ограничения</li>
+                <li class="list-group-item">Издательство</li>
+                <li class="list-group-item">Количество книг в наличии</li>
+                <li class="list-group-item">Доступен для заказа</li>
+                <li class="list-group-item">Рейтинг</li>
+                <li class="list-group-item">Дата внесения в каталог</li>
+                <li class="list-group-item">Дата последнего изменения карточки</li>
+              </ul>        
+            </div>
+            <div class="col-sm">
+              <ul class="list-group">
+                <li class="list-group-item">{{object.name}}</li>
+                <li class="list-group-item">{{object.price}}</li>
+                <li class="list-group-item">{{object.author}}</li>
+                <li class="list-group-item">{{object.series}}</li>
+                <li class="list-group-item">{{object.genre}}</li>
+                <li class="list-group-item">{{object.publishing_year}}</li>
+                <li class="list-group-item">{{object.pages}}</li>
+                <li class="list-group-item">{{object.binding}}</li>
+                <li class="list-group-item">{{object.book_format}}</li>
+                <li class="list-group-item">{{object.isbn}}</li>
+                <li class="list-group-item">{{object.weight}}</li>
+                <li class="list-group-item">{{object.age}}</li>
+                <li class="list-group-item">{{object.publishing}}</li>
+                <li class="list-group-item">{{object.in_stock}}</li>
+                <li class="list-group-item">{{object.active}}</li>
+                <li class="list-group-item">{{object.rating}}</li>
+                <li class="list-group-item">{{object.catalog_date}}</li>
+                <li class="list-group-item">{{object.card_change_date}}</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="col">
+        
+      </div>
+    </div> 
   {% endblock main %}

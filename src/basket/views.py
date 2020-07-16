@@ -46,8 +46,6 @@ class AddBookToBasket(UpdateView):
 
 
 
-
-
 class ListBooksInBasket(DetailView):
     login_url = reverse_lazy('login')
     model = Basket
@@ -62,9 +60,6 @@ class ListBooksInBasket(DetailView):
             return obj
 
 
-
-
-
     #def get_queryset(self):
     #    queryset = BookInBasket.objects.filter(
     #        basket__session_key=self.request.session.session_key,
@@ -77,13 +72,6 @@ class DeleteBooksFromBasket(DeleteView):
     template_name = 'basket/delete_books_from_basket.html'
     def get_success_url(self):
         return reverse_lazy('basket:list')
-
-
-
-
-
-
-
 
         #def get_object(self):
         ##self.request.session.set_expiry(1)
