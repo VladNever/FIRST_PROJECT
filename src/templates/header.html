@@ -1,62 +1,53 @@
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-4">  
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                  <div class="col">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'homepage:homepage' %}">На главную страницу</a>
-                      </li>
-                        <a class="nav-link" href="{% url 'books:list' %}">Книги</a>
-                        <a class="nav-link" href="{% url 'ref_books:list_genre' %}">Жанры</a>
-                      {% if 'books.add_books' and 'ref_books.add_genre' in perms %}
-                        <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Создать</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                              <a class="dropdown-item" href="{% url 'books:create' %}">Создать книгу</a>
-                              <a class="dropdown-item" href="{% url 'ref_books:create_genre' %}">Создать жанр</a>
-                            </div>
-                        </li>
-                      {% endif %}
-
-                    </ul>
-                  </div>
-            <div class="d-flex justify-content-end">
-              <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% url 'profile:update' user.pk %}"> Пользователь: {{ user.username }} </a>
-                    </li>                    
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Профиль</a>
-                      <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{% url 'profile:update' user.pk %}">Данные пользователя</a>
-                        <a class="dropdown-item" href="{% url 'basket:list'%}">Корзина</a>
-                        <a class="dropdown-item" href="">Заказы</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
-                      </div>
-                    </li>
-                  {% comment %} <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile:detail' user.pk %}"> Просмотреть профиль </a>
-                  </li>  {% endcomment %}              
-                  {% else %}
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Войти</a>
-                      <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{% url 'profile:create'%}">Регистрация</a>
-                        <a class="dropdown-item" href="{% url 'basket:list'%}">Корзина</a>
-                        <a class="dropdown-item" href="">Заказы</a>
-                        <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
-                      </div>
-                    </li>                  
-                  {% endif %}
-                <form class="form-inline my-2 my-lg-0">
-                  {% csrf_token %}
-                  <input class="form-control mr-sm-2" type="text" placeholder="Поиск книги" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>               
-              </ul>
-            </div>
+{% comment %} <nav class="navbar p-0 flex-md-nowrap navbar-dark bg-dark sticky-top"> {% endcomment %}
+<nav class="navbar navbar-expand-md flex-md-nowrap navbar-dark bg-dark sticky-top">  
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <div class="col">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'homepage:homepage' %}">На главную страницу</a>
+            </li>
+              <a class="nav-link" href="{% url 'books:list' %}">Книги</a>
+              <a class="nav-link" href="{% url 'ref_books:list_genre' %}">Жанры</a>
+          </ul>
         </div>
-    </nav>
+        <div class="d-flex justify-content-end">
+          <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile:update' user.pk %}"> Пользователь: {{ user.username }} </a>
+              </li>                    
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Профиль</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="{% url 'profile:update' user.pk %}">Данные пользователя</a>
+                  <a class="dropdown-item" href="{% url 'basket:list'%}">Корзина</a>
+                  <a class="dropdown-item" href="{% url 'order:list'%}">Заказы</a>
+                  {% if user.is_staff %}
+                    <a class="dropdown-item" href="{% url 'order:list_manager'%}">Менеджер</a>
+                  {% endif %}
+                  <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
+                </div>
+              </li>             
+            {% else %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Войти</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" href="{% url 'profile:create'%}">Регистрация</a>
+                  <a class="dropdown-item" href="{% url 'basket:list'%}">Корзина</a>
+                  <a class="dropdown-item" href="">Заказы</a>
+                  <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
+                </div>
+              </li>                  
+            {% endif %}
+            <form class="form-inline my-2 my-lg-0" action="{% url 'books:list_search' %}" method="get">
+              {% csrf_token %}
+              <input name="q" class="form-control mr-sm-2" type="text" placeholder="Поиск книги" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>               
+          </ul>
+        </div>
+    </div>
+</nav>
+
 
 

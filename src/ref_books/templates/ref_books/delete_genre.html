@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Удаление жанра {% endblock title %}
-  {% block main %} 
+  {% block main_block_manager %} 
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Вы действительно хотите удалить Жанр: {{ object }}?</h1>
@@ -14,4 +14,4 @@
         <button type="submit" class="btn btn-danger">Удалить</button>
       </form>
     </div>
-  {% endblock main %}
+  {% endblock main_block_manager %}

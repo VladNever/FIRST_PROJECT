@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from .models import Genre
 from .forms import GenreForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
@@ -15,38 +16,49 @@ from django.views.generic import DetailView
 # 3 POST - получить данные из POST-запроса, создать объкт, сохранить его в БД
 # 4 Показать "другую" страницу (сообщение об успехе)
 
-class CreateGenre(PermissionRequiredMixin, CreateView):
+class CreateGenre(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     permission_required = 'ref_books.add_genre'
     model = Genre
     form_class = GenreForm
     template_name = 'ref_books/create_genre.html'
     def get_success_url(self):
-        return reverse_lazy('ref_books:list_genre')
+        return reverse_lazy('ref_books:ref_books_manager')
 
-class UpdateGenre(PermissionRequiredMixin, UpdateView):
+class UpdateGenre(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     permission_required = 'ref_books.change_genre'
     model = Genre
     form_class = GenreForm
     template_name = 'ref_books/update_genre.html'
     def get_success_url(self):
-        return reverse_lazy('ref_books:list_genre')
+        return reverse_lazy('ref_books:ref_books_manager')
         #return reverse_lazy('genre:list', kwargs={'pk': self.object.pk})
 
 class ListGenre(ListView):
     model = Genre
     template_name = 'ref_books/list_genre.html'
 
-class DeleteGenre(PermissionRequiredMixin, DeleteView):
+class DeleteGenre(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     permission_required = 'ref_books.delete_genre'
     model = Genre
     template_name = 'ref_books/delete_genre.html'
     def get_success_url(self):
-        return reverse_lazy('ref_books:list_genre')
+        return reverse_lazy('ref_books:ref_books_manager')
 
 class DetailGenre(DetailView):
     model = Genre
     template_name = 'ref_books/detail_genre.html'
 
+class RefBooksManager(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    permission_required = 'ref_books.view_all_genres'
+    model = Genre
+    template_name = 'ref_books/ref_books_manager.html'
+
+    def get_success_url(self):
+        return reverse_lazy('ref_books:ref_books_manager')
 
 
 

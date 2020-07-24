@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Изменение Жанра {% endblock title %}
-  {% block main %} 
+  {% block main_block_manager %} 
     <section class="jumbotron text-center">
       <div class="container">
         <h1>Изменить Жанр</h1>
@@ -15,4 +15,4 @@
         <button type="submit" class="btn btn-danger">Отправить</button>
       </form>
     </div>
-  {% endblock main %}
+  {% endblock main_block_manager %}

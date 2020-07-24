@@ -44,6 +44,10 @@ class Profile(AbstractUser):
         blank=True
     )
 
+    class Meta:
+        permissions = [
+                    ("view_all_profiles", "Can view all profiles"),
+                ]
     def __str__(self):
         return self.first_name
 

@@ -1,5 +1,5 @@
 from django.urls import path
-from ref_books.views import CreateGenre, UpdateGenre, ListGenre, DeleteGenre, DetailGenre
+from ref_books.views import CreateGenre, UpdateGenre, ListGenre, DeleteGenre, DetailGenre, RefBooksManager
 
 app_name = "ref_books"
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('list-genre/', ListGenre.as_view(), name="list_genre"),
     path('delete-genre/<int:pk>', DeleteGenre.as_view(), name="delete_genre"),
     path('detail-genre/<int:pk>', DetailGenre.as_view(), name="detail_genre"),
+    path('ref_books_manager', RefBooksManager.as_view(), name="ref_books_manager"),
 ]

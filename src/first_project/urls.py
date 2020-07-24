@@ -28,4 +28,5 @@ urlpatterns = [
     path('login/', MyLogin.as_view(), name="login"),
     path('logout/', MyLogout.as_view(), name="logout"),
     path('basket/', include('basket.urls', namespace="basket")),
-] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('order/', include('order.urls', namespace="order")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,7 +6,7 @@
       <div class="col">
         
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <section class="jumbotron text-center">
           <div class="container">
             <h1>Список книг в Корзине</h1><br>  
@@ -70,7 +70,7 @@
                 </div>
               </div>
               <div class="card-footer bg-transparent ">
-                <button type="button" class="btn btn-danger btn-lg btn-block">Оформить заказ</button>
+                <a href="{% url 'order:create' %}" type="button" class="btn btn-danger btn-lg btn-block">Оформить заказ</a>
               </div>
             </div>
           </div>

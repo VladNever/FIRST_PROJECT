@@ -1,0 +1,71 @@
+{% extends "base_manager.html" %}
+{% load static %}
+  {% block title %} Список всех книг {% endblock title %}
+  {% block main_block_manager %}
+    <section class="jumbotron text-center">
+      <div class="container sticky-top">
+        <h1 class="sticky-top">Список всех Книг</h1><br>  
+      </div>
+
+          <div class="col bg-light py-3" align="center"> 
+            <li class="list-group-item d-flex justify-content-between align-items-center ">
+              <div class="col" align="center">
+              <a class="btn btn-success btn-sm" href="{% url 'books:create' %}">Создать</a>
+              </div>
+            </li>
+          </div>
+
+
+
+    </section>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr align="center">
+            <th scope="col" width="5%">ID Книги</th>
+            <th scope="col" width="9%">Обложка</th>
+            <th scope="col" width="13%">Название книги</th>
+            <th scope="col" width="11%">Автор</th>
+            <th scope="col" width="6%">Цена</th>
+            <th scope="col" width="9%">Доступен для заказа</th>
+            <th scope="col" width="11%">Создано</th>
+            <th scope="col" width="12%">Обновлено</th>
+            <th scope="col" width="8%">Детали</th>
+            <th scope="col" width="8%">Обновить</th>
+            <th scope="col" width="8%">Удалить</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in object_list %}
+              <tr align="center">
+                <th scope="row">{{ book.pk }}</th>
+                <td>
+                  {% if book.cover_photo %}
+                    <img src="{{ book.cover_photo.url }}" width="50%">
+                  {% else %}
+                    
+                  {% endif %}
+                </td>
+                <td>{{ book.name }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.price }}</td>
+                {% if book.active == True %}
+                <td align="center"><span class="badge badge-success badge-pill">Доступен</span></td>
+                {% else %}
+                <td align="center"><span class="badge badge-danger badge-pill">Не доступен</span></td>
+                {% endif %}
+                <td>{{ book.catalog_date }}</td>
+                <td>{{ book.card_change_date }}</td>
+                <td>
+                  <a class="btn btn-info btn-sm btn-block" href=" {% url 'books:detail' book.pk%}">Посмотреть</a>
+                </td>
+                <td>
+                  <a class="btn btn-warning btn-sm btn-block" href=" {% url 'books:update' book.pk%}">Обновить</a>
+                </td>
+                <td>
+                  <a class="btn btn-danger btn-sm btn-block" href=" {% url 'books:delete' book.pk%}">Удалить</a>
+                </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  {% endblock main_block_manager %}

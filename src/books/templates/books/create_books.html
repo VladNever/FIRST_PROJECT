@@ -1,22 +1,22 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Создание новой книги {% endblock title %}
-  {% block main %}
-    <main role="main" class="container"> 
+  {% block main_block_manager %}
       <section class="jumbotron text-center">
         <div class="container">
           <h1>Создание новой книги</h1>
         </div>
       </section>
-      <div class="album py-5 bg-light">
-        <div class="my-3 p-3 bg-white rounded shadow-sm"> 
-          <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-danger">Отправить</button>
-          </form>
+      <div class="container">
+        <div class="album py-5 bg-light">
+          <div class="my-3 p-3 bg-white rounded shadow-sm"> 
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-danger">Отправить</button>
+            </form>
+          </div>
         </div>
-      </div>
-    </div>
-  {% endblock main %}
+      </div>  
+  {% endblock main_block_manager %}

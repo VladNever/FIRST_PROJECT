@@ -31,6 +31,11 @@ def add_group_managers(sender, created, **kwargs):
             perms_all.get(name="Can add genre"),
             perms_all.get(name="Can change genre"),
             perms_all.get(name="Can delete genre"),
+            perms_all.get(name="Can view all orders"),
+            perms_all.get(name="Can view all baskets"),
+            perms_all.get(name="Can view all books"),
+            perms_all.get(name="Can view all genres"),
+            perms_all.get(name="Can view all profiles"),
         ]
         gr_managers, created = Group.objects.get_or_create(
             name="Managers", 
@@ -62,7 +67,7 @@ def add_group_customers(sender, created, **kwargs):
 @receiver(post_save, sender=Profile)
 # created - если сущность только создана, а не сохранялась 
 def set_group(sender, instance, created,**kwargs):
-    if created:
+    #if created:
         if instance.is_superuser:
             gr = Group.objects.get(
             name="Admin"
@@ -84,8 +89,8 @@ def set_group(sender, instance, created,**kwargs):
             instance.groups.add(gr)
         else:
             pass
-    else:
-        pass
+    #else:
+    #    pass
 
 
 

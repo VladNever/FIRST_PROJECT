@@ -6,7 +6,7 @@
       <div class="col">
         
       </div>
-      <div class="col-7">
+      <div class="col-8">
         <div class="d-flex align-items-center p-3 my-3 text-black-50 bg-purple rounded shadow-sm">
           <div class="lh-100">
             <h6 class="mb-0 text-dark lh-100">Интернет-магазин книг</h6>
@@ -95,7 +95,25 @@
         </div>
       </div>
       <div class="col">
-        
+        <div class="col-md-auto">
+          <div class="card mb-3 mt-3" style="width: 235px; height: 160px;" >
+            <div class="card-body">
+              <h5 class="card-title text-center">Курсы НБРБ на сегодня </h5>
+              <table cellpadding="5" align="center">
+                <tr>
+                  <td align="center">USD</td>
+                  <td align="center">EUR</td>
+                  <td align="center">RUB</td>
+                </tr>
+                <tr>
+                  <td><b>{{ usd }}</b></td>
+                  <td><b>{{ eur }}</b></td>
+                  <td><b>{{ rub }}</b></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div> 
   {% endblock main %}

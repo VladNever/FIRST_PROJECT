@@ -1,0 +1,46 @@
+{% extends "base_manager.html" %}
+{% load static %}
+  {% block title %} Список всех заказов {% endblock title %}
+  {% block main_block_manager %}
+    <section class="jumbotron text-center">
+      <div class="container sticky-top">
+        <h1 class="sticky-top">Список всех Заказов</h1><br>  
+      </div>
+    </section>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr align="center">
+            <th scope="col" width="5%">ID Заказа</th>
+            <th scope="col" width="7%">Имя клиента</th>
+            <th scope="col" width="30%">Адрес доставки</th>
+            <th scope="col" width="13%">Контактный телефон</th>
+            <th scope="col" width="10%">Статус Заказа</th>
+            <th scope="col" width="14%">Создан</th>
+            <th scope="col" width="14%">Обновлён</th>
+            <th scope="col" width="7%">Детали</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in object_list %}
+              <tr align="center">
+                <th scope="row">{{ order.pk }}</th>
+                <td>{{ order.basket.user.first_name }}</td>
+                <td>{{ order.delivery_address }}</td>
+                <td>{{ order.contact_phone }}</td>
+                {% if order.status == 'В обработке' %}
+                <td align="center"><span class="badge badge-warning badge-pill">{{ order.status }}</span></td>
+                {% elif order.status == 'Отменён'%}
+                <td align="center"><span class="badge badge-danger badge-pill">{{ order.status }}</span></td>
+                {% else %}
+                <td align="center"><span class="badge badge-success badge-pill">{{ order.status }}</span></td>
+                {% endif %}
+                <td>{{ order.created }}</td>
+                <td>{{ order.updated }}</td>
+                <td>
+                  <a class="btn btn-info btn-sm" href=" {% url 'order:detail_manager' order.pk%} ">Посмотреть</a>
+                </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  {% endblock main_block_manager %}

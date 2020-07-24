@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from books.models import Books
 from ref_books.models import Genre
 from django.views.generic import TemplateView
-
+import requests
 # Create your views here.
 
 # Для CREATE
@@ -18,8 +18,23 @@ class HomePage(TemplateView):
         'Genre': Genre.objects.all(),
         'last_added_books': Books.objects.all().order_by('-catalog_date')[:3],
         'most_expensive': Books.objects.all().order_by('-price')[:3],
-    } 
-   
+    }
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+
+        currencies = requests.get('https://www.nbrb.by/api/exrates/rates?periodicity=0')
+        currencies = currencies.json()
+    
+        usd = currencies[4].get('Cur_OfficialRate')
+        eur = currencies[5].get('Cur_OfficialRate')
+        rub = currencies[16].get('Cur_OfficialRate')
+
+        context['usd'] = usd
+        context['eur'] = eur
+        context['rub'] = rub
+        
+        return self.render_to_response(context)
 
 
 

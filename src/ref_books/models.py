@@ -15,7 +15,10 @@ class Genre(models.Model):
         null=True,
         blank=True
     )
-
+    class Meta:
+        permissions = [
+                    ("view_all_genres", "Can view all genres"),
+                ]
     def __str__(self):
         return self.name
 

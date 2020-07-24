@@ -1,0 +1,27 @@
+{% extends "base_manager.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+  {% block title %} Выполнить заказ {% endblock title %}
+  {% block main_block_manager %}
+    <div class="row">
+      <div class="col">
+        
+      </div>
+      <div class="col-8">
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1>Выполнить заказ?</h1>
+          </div>
+        </section>
+        <div class="album py-5 bg-light"> 
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-danger">Подтвердить</button>
+          </form>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div> 
+  {% endblock main_block_manager %}

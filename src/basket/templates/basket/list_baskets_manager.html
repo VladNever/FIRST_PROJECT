@@ -1,0 +1,35 @@
+{% extends "base_manager.html" %}
+{% load static %}
+  {% block title %} Список всех Корзин {% endblock title %}
+  {% block main_block_manager %}
+    <section class="jumbotron text-center">
+      <div class="container sticky-top">
+        <h1 class="sticky-top">Список всех Корзин</h1><br>  
+      </div>
+    </section>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr align="center">
+            <th scope="col" width="5%">ID Корзины</th>
+            <th scope="col" width="7%">Имя клиента</th>
+            <th scope="col" width="14%">Создан</th>
+            <th scope="col" width="14%">Обновлён</th>
+            <th scope="col" width="7%">Детали</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for basket in object_list %}
+              <tr align="center">
+                <th scope="row">{{ basket.pk }}</th>
+                <td>{{ basket.user.first_name }}</td>
+                <td>{{ basket.basket_date }}</td>
+                <td>{{ basket.basket_change_date }}</td>
+                <td>
+                  <a class="btn btn-info btn-sm" href=" {% url 'basket:detail_manager' basket.pk%} ">Посмотреть</a>
+                </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+  {% endblock main_block_manager %}

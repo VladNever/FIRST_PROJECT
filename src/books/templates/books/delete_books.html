@@ -1,13 +1,9 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Удаление книги {% endblock title %}
-  {% block main %}
-    <div class="row">
-      <div class="col">
-        
-      </div>
-      <div class="col-7">
+  {% block main_block_manager %}
+      <div class="container">
         <section class="jumbotron text-center">
           <div class="container">
             <h1>Вы действительно хотите удалить книгу: {{ object }}?</h1>
@@ -16,12 +12,8 @@
         <div class="album py-5 bg-light"> 
           <form action="" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Удалить</button>
+            <button type="submit" class="btn btn-danger">Подтвердить</button>
           </form>
         </div>
       </div>
-      <div class="col">
-        
-      </div>
-    </div> 
-  {% endblock main %}
+  {% endblock main_block_manager %}

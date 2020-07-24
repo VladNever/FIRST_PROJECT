@@ -1,0 +1,97 @@
+{% extends "base_manager.html" %}
+{% load static %}
+  {% block title %} Список всех пользователей {% endblock title %}
+  {% block main_block_manager %}
+    <section class="jumbotron text-center">
+      <div class="container sticky-top">
+        <h1 class="sticky-top">Список всех пользователей</h1><br>  
+      </div>
+          <div class="col bg-light py-3" align="center"> 
+            <li class="list-group-item d-flex justify-content-between align-items-center ">
+              <div class="col" align="center">
+              </div>
+            </li>
+          </div>
+    </section>
+
+      <div class="col">
+        <p>
+          <div class="col-3">
+            <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#list_profiles_manager_staff" aria-expanded="false" aria-controls="list_profiles_manager_staff">
+              Список сотрудников
+            </button>
+          </div>
+        </p>
+        <div class="collapse" id="list_profiles_manager_staff">
+          <div class="card card-body">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr align="center">
+                  <th scope="col" width="22%">Логин</th>
+                  <th scope="col" width="22%">Имя</th>
+                  <th scope="col" width="23%">email</th>
+                  <th scope="col" width="23%">Дата регистрации</th>
+                  <th scope="col" width="21%">Обновить</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for profile in object_list %}
+                  {% if profile.is_staff and profile.is_superuser is False %}
+                    <tr align="center">
+                      <td>{{ profile.username }}</td>
+                      <td>{{ profile.first_name }}</td>
+                      <td>{{ profile.email }}</td>
+                      <td>{{ profile.date_joined }}</td>
+                      <td>
+                        <a class="btn btn-warning btn-sm btn-block" href=" {% url 'profile:update_manager' profile.pk%} ">Посмотреть/Обновить</a>
+                      </td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col">
+        <p>
+          <div class="col-3">
+            <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#list_profiles_manager_customers" aria-expanded="false" aria-controls="list_profiles_manager_customers">
+              Список клиентов
+            </button>
+          </div>
+        </p>
+        <div class="collapse" id="list_profiles_manager_customers">
+          <div class="card card-body">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr align="center">
+                  <th scope="col" width="22%">Логин</th>
+                  <th scope="col" width="22%">Имя</th>
+                  <th scope="col" width="23%">email</th>
+                  <th scope="col" width="23%">Дата регистрации</th>
+                  <th scope="col" width="21%">Обновить</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for profile in object_list %}
+                  {% if profile.is_staff is False and profile.is_superuser is False %}
+                    <tr align="center">
+                      <td>{{ profile.username }}</td>
+                      <td>{{ profile.first_name }}</td>
+                      <td>{{ profile.email }}</td>
+                      <td>{{ profile.date_joined }}</td>
+                      <td>
+                        <a class="btn btn-warning btn-sm btn-block" href=" {% url 'profile:update_manager' profile.pk%} ">Посмотреть/Обновить</a>
+                      </td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+  {% endblock main_block_manager %}

@@ -1,9 +1,8 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Создание нового жанра {% endblock title %}
-  {% block main %}
-    <main role="main" class="container"> 
+  {% block main_block_manager %}
       <section class="jumbotron text-center">
         <div class="container">
           <h1>Создание нового Жанра</h1>
@@ -18,5 +17,4 @@
           </form>
         </div>  
       </div>
-    </div>
-  {% endblock main %}
+  {% endblock main_block_manager %}

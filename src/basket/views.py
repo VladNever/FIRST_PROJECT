@@ -3,6 +3,7 @@ from django.views.generic import UpdateView, ListView, DeleteView, DetailView
 from .models import Basket, BookInBasket
 from books.models import Books
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 class AddBookToBasket(UpdateView):
     login_url = reverse_lazy('login')
@@ -24,7 +25,6 @@ class AddBookToBasket(UpdateView):
                 book = book,
                 defaults = {},
             )
-            return obj
         else:
             if not self.request.session.session_key:
                 self.request.session.save()
@@ -40,10 +40,9 @@ class AddBookToBasket(UpdateView):
                 book = book,
                 defaults = {},
             )
-            return obj
+        return obj
     def get_success_url(self):
         return reverse_lazy('books:list')
-
 
 
 class ListBooksInBasket(DetailView):
@@ -60,12 +59,6 @@ class ListBooksInBasket(DetailView):
             return obj
 
 
-    #def get_queryset(self):
-    #    queryset = BookInBasket.objects.filter(
-    #        basket__session_key=self.request.session.session_key,
-    #    )
-    #    return queryset
-
 class DeleteBooksFromBasket(DeleteView):
     login_url = reverse_lazy('login')
     model = BookInBasket
@@ -73,37 +66,16 @@ class DeleteBooksFromBasket(DeleteView):
     def get_success_url(self):
         return reverse_lazy('basket:list')
 
-        #def get_object(self):
-        ##self.request.session.set_expiry(1)
-        #basket_pk = self.request.session.get('basket_pk')
-        #book_pk = self.request.GET.get('book_pk')
-        #book = Books.objects.get(pk=book_pk)
-        #user = self.request.user
-        #if self.request.user.is_authenticated:
-        #    if bool(basket_pk) is True:
-        #        basket = Basket.objects.get(
-        #            pk=basket_pk,
-        #            user = user,
-        #        )
-        #    else:
-        #        basket = Basket.objects.create(
-        #            user = user,
-        #        )
-        #        self.request.session['basket_pk'] = basket.pk
-        #    obj, create = self.model.objects.get_or_create(
-        #        basket = basket,
-        #        book = book,
-        #        defaults = {},
-        #    )
-        #    return obj
-        #else:
-        #    basket, created = Basket.objects.get_or_create(
-        #        session_key = self.request.session.session_key,
-        #        defaults = {'user': None}
-        #    )
-        #    obj, create = self.model.objects.get_or_create(
-        #        basket = basket,
-        #        book = book,
-        #        defaults = {},
-        #    )
-        #    return obj
+
+class ListBasketsManager(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    permission_required = 'basket.view_all_baskets'
+    model = Basket
+    template_name = 'basket/list_baskets_manager.html'
+    ordering = ['-basket_date',]
+
+class DeatailBasketsManager(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    login_url = reverse_lazy('login')
+    permission_required = 'basket.view_all_baskets'
+    model = Basket
+    template_name = 'basket/detail_basket_manager.html'

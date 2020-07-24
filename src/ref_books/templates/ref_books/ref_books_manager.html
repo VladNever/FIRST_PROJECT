@@ -1,0 +1,51 @@
+{% extends "base_manager.html" %}
+{% load static %}
+  {% block title %} Справочники {% endblock title %}
+  {% block main_block_manager %}
+    <section class="jumbotron text-center">
+      <div class="container sticky-top">
+        <h1 class="sticky-top">Справочники</h1><br>  
+      </div>
+    </section>
+    <div class="container">
+      <div class="col">
+        <p>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#list_genre_manager" aria-expanded="false" aria-controls="list_genre_manager">
+            Список Жанров
+          </button>
+          <a class="btn btn-success" type="button" href="{% url 'ref_books:create_genre' %}">
+            Создать Жанр
+          </a>
+        </p>
+        <div class="collapse" id="list_genre_manager">
+          <div class="card card-body">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr align="center">
+                  <th scope="col" width="20%">Название Жанра</th>
+                  <th scope="col" width="60%">Описание Жанра</th>
+                  <th scope="col" width="10%">Обновить</th>
+                  <th scope="col" width="10%">Удалить</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for genre in object_list %}
+                    <tr align="center">
+                      <td>{{ genre.name }}</td>
+                      <td>{{ genre.description }}</td>
+                      <td>
+                        <a class="btn btn-warning btn-sm btn-block" href=" {% url 'ref_books:update_genre' genre.pk%} ">Обновить</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-danger btn-sm btn-block" href=" {% url 'ref_books:delete_genre' genre.pk%} ">Удалить</a>
+                      </td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  {% endblock main_block_manager %}

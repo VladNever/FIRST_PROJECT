@@ -1,13 +1,9 @@
-{% extends "base.html" %}
+{% extends "base_manager.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
   {% block title %} Редактирование книги {% endblock title %}
-  {% block main %}
-    <div class="row">
-      <div class="col">
-        
-      </div>
-      <div class="col-7">
+  {% block main_block_manager %}
+      <div class="container">
         <section class="jumbotron text-center">
           <div class="container">
             <h1>Редактирование книги: "{{object.name}}"</h1>
@@ -21,8 +17,4 @@
           </form>
         </div>
       </div>
-      <div class="col">
-        
-      </div>
-    </div> 
-  {% endblock main %}
+  {% endblock main_block_manager %}

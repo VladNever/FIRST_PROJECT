@@ -84,5 +84,12 @@ class Books(models.Model):
         auto_now_add=False
     )
 
+    class Meta:
+        permissions = [
+                    ("view_all_books", "Can view all books"),
+                ]
+
+
+
     def __str__(self):
         return self.name

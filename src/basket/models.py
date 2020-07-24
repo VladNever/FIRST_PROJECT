@@ -26,6 +26,11 @@ class Basket(models.Model):
     )
     class Meta:
         unique_together = ('user', 'session_key',)
+        permissions = [
+                    ("view_all_baskets", "Can view all baskets"),
+                ]
+
+        
 
     @property
     def price(self):

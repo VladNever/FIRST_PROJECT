@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from .models import Profile
-from .forms import CreateProfileForm, UpdateProfileForm
+from .forms import CreateProfileForm, UpdateProfileForm, UpdateProfileFormManager
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
@@ -28,16 +28,22 @@ class DetailProfile(DetailView):
     model = Profile
     template_name = 'profiles/detail_profile.html'
 
-#class ListGenre(ListView):
-#    model = Genre
-#    template_name = 'ref_books/list_genre.html'
 
-#class DeleteGenre(PermissionRequiredMixin, DeleteView):
-#    permission_required = 'ref_books.delete_genre'
-#    model = Genre
-#    template_name = 'ref_books/delete_genre.html'
-#    def get_success_url(self):
-#        return reverse_lazy('ref_books:list_genre')
+class ListProfilesManager(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
+    permission_required = 'profiles.view_all_profiles'
+    model = Profile
+    template_name = 'profiles/list_profiles_manager.html'
+
+class UpdateProfileManager(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    permission_required = 'profiles.view_all_profiles'
+    model = Profile
+    form_class = UpdateProfileFormManager
+    template_name = 'profiles/update_profile_manager.html'
+    def get_success_url(self):
+        return reverse_lazy('profile:list_manager')
+
 
 
 

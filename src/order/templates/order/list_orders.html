@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block title %} Список заказов {% endblock title %}
+  {% block main %}
+    <div class="row">
+      <div class="col">
+
+      </div>
+      <div class="col-8">
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1>Список Заказов</h1><br>  
+          </div>
+        </section>
+        {% for order in object_list %}
+            <ul class="list-group"><br>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-9">
+                      <table class="table">
+                        <thead align="center">
+                          <tr>
+                            <th scope="col" width="1%">Количество</th>
+                            <th scope="col" width="39%">Название книги</th>
+                            <th scope="col" width="35%">Автор</th>
+                            <th scope="col" width="25%">Стоимость (BYN)</th>
+                          </tr>
+                        </thead>
+                          <tbody align="center">
+                            {% for book in order.basket.books.all %}
+                              <tr valign="middle">
+                                <th scope="row">{{ book.quantity }} X </th>
+                                <td>{{ book.book.name }}</td>
+                                <td>{{ book.book.author }}</td>
+                                <td>{{ book.price }}</td>
+                              </tr>
+                            {% endfor %}
+                              <tr valign="middle" >
+                                <td colspan="3" align="right"><b>Итого</b></td>
+                                <td colspan="3" align="center"><b>{{ order.basket.price }}</b></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                    </div>
+                    <div class="col-md-auto bg-light">
+                      <div class="card mb-3 mt-3" style="width: 235px; height: 160px;" >
+                        <div class="card-body">
+                          <h5 class="card-title text-center">Заказ № {{ order.pk }}</h5>
+                          <table cellpadding="5" align="center">
+                            <tr>
+                              <td align="right">Статус:</td>
+                              {% if order.status == 'В обработке' %}
+                              <td align="left"><span class="badge badge-warning badge-pill">{{ order.status }}</span></td>
+                              {% elif order.status == 'Отменён'%}
+                              <td align="left"><span class="badge badge-danger badge-pill">{{ order.status }}</span></td>
+                              {% else %}
+                              <td align="left"><span class="badge badge-success badge-pill">{{ order.status }}</span></td>
+                              {% endif %}
+                            </tr>
+                            <tr>
+                              {% if order.status == 'В обработке' %}
+                                <td align="right">Отменить:</td>
+                                <td align="left"><a href="{% url 'order:canceled_status' order.pk%}?order_pk={{ order.pk }}"><i class="fas fa-trash"></i></a></td>
+                              {% else %}
+
+                              {% endif %}
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+        {% endfor %}
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+  {% endblock main %}

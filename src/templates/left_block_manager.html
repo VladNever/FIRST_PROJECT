@@ -1,0 +1,38 @@
+<div class="col bg-light">
+  <nav class="col-md-2 d-none d-md-block  sidebar ">
+    <div class="sidebar-sticky position-fixed">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active text-dark font-weight-bold" href="{% url 'order:list_manager'%}">
+            <i class="far fa-file-alt fa-fw"></i>
+            Заказы
+          </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-dark font-weight-bold" href="{% url 'basket:list_manager'%}">
+            <i class="fas fa-shopping-basket fa-fw" ></i>
+            Корзины
+          </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-dark font-weight-bold " href="{% url 'books:list_manager'%}">
+            <i class="fas fa-book fa-fw"></i>
+            Книги
+          </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-dark font-weight-bold" href="{% url 'ref_books:ref_books_manager'%}">
+            <i class="fas fa-list fa-fw"></i>
+            Справочники
+          </a> 
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-dark font-weight-bold" href="{% url 'profile:list_manager'%}">
+            <i class="fas fa-user fa-fw"></i>
+            Пользователи
+          </a> 
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
