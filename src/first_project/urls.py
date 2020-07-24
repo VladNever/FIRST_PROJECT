@@ -29,4 +29,4 @@ urlpatterns = [
     path('logout/', MyLogout.as_view(), name="logout"),
     path('basket/', include('basket.urls', namespace="basket")),
     path('order/', include('order.urls', namespace="order")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

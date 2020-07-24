@@ -26,7 +26,7 @@ SECRET_KEY = '%vgr=8+z^1*ix6rbfi0&k2dbo-)g8karpirx2x*3w(wj^wrsfo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['VladNever.pythonanywhere.com']
+ALLOWED_HOSTS = ['VladNever.pythonanywhere.com']
 
 
 # Application definition
@@ -146,7 +146,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/home/VladNever/FIRST_PROJECT/static'
 
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = '/home/VladNever/FIRST_PROJECT/media'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/VladNever/FIRST_PROJECT/media'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
